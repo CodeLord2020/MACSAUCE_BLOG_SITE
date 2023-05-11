@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Macsauce Expose</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+	</head>
+	
+	<body class="is-preload">
+		<header id="header">
+						
+			<a href="{% url 'index' %}" class="logo">Home</a>
+			
+		</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Hi,{% if user.is_authenticated %}{{user.username}}{% endif %}<br />
+						Welcome</h1>
+						<p>This is Macsauce Expose, A free and interesting blog site <a href="https://twitter.com/babs_rasheed">@babs_rasheed</a><br /></p>
+						<!-- <ul class="actions">
+							<li><a href="{%url 'index' %}" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul> -->
+					</div>
+
+				<!-- Header -->
+					<header id="header">
+						
+						<a href="{% url 'index' %}" class="logo">Home</a>
+						
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="{% url 'create_post' %}">Create_Post</a></li>
+							<li><a href="/category/Programming">Programming</a></li>
+							<li><a href="/category/Entertainment">Entertainment</a></li>
+							<li><a href="/category/Technology">Technology</a></li>
+							<li><a href="/category/Sport">Sport</a></li>
+							<li><a href="/category/Politics">Politics</a></li>
+							<li><a href="/category/Others">  Others</a></li>
+							{%  if user.is_authenticated %}
+							<li style="color: rgb(255, 255, 255);" class="active"><a href="logout">Logout</a></li>
+							{% else %}
+							<li style="color: rgb(248, 149, 149);" class="active"><a href="login">Login or Sign up</a></li>
+							{% endif %}
+						</ul>
+						
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						
+						    
+							<section class="posts">
+						
+							{% for post in page  %}
+
+							
+								<article>
+									<header>
+										<span class="date">Posted on {{post.time_created}}</span>
+										<span class="date">Posted {{post.time_created|timesince}} ago</span>
+										<span class="date">Posted by <b>{{post.Author}}</b></span>
+										<h2><a href="/postpage/{{post.id}}">{{post.title}}</a></h2>
+									</header>
+									{% if post.image %}
+									<a href="/postpage/{{post.id}}" class="image fit"><img src="{{post.image.url}}" alt="{% static 'images/_thumb1.jpg' %}" /></a>
+									{% else %}
+									<a href="/postpage/{{post.id}}" class="image fit"><img src="{% static 'images/_thumb2.jpg' %}" alt="" /></a>
+									{% endif %}
+									<style>
+									img	{
+										min-height: 300px;
+										min-width: 400px;
+										max-width: 500px;
+										max-height: 300px;
+										width: auto;
+										height: auto;
+									  }
+									</style> 
+								<ul class="actions special">
+										<li><a href="/postpage/{{post.id}}" class="button">Full Story</a></li>
+									</ul>
+								</article>
+							    
+							{% endfor %}
+
+							</section>
+							
+						
+
+						<!-- Footer -->
+							<footer>
+								<div class="pagination">
+									{% if page.has_previous %}
+										<a href="?page={{ page.previous_page_number }}">previous</a>
+									{% endif %}
+									{% for num in page_range %}
+										{% if page.number == num %}
+											<span class="current-page">{{ num }}</span>
+										{% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+											<a href="?page={{ num }}">{{ num }}</a>
+										{% endif %}
+									{% endfor %}
+									{% if page.has_next %}
+										<a href="?page={{ page.next_page_number }}">next</a>
+									{% endif %}
+								</div>
+
+								
+							</footer>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+
+							<p> List for most popular posts or something else sha, should probably remove this section. </p> 
+						</section>
+							<section>
+								<form class="search" action="{% url 'index' %}">
+									<input type="text" name="q"  placeholder="Search for posts" id="s" />
+									<button type="submit">Search</button>
+								</form>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://twitter.com/babs_rasheed" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://www.facebook.com/adebayo.rasheed.752" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="https://github.com/CodeLord2020" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://www.instagram.com/macsauce419/" class="icon brands alt fa-instagram"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Macsauce Blog</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
