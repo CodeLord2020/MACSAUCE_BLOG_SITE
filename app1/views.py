@@ -55,8 +55,6 @@ def forgot_password(request):
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             subject = 'Reset Password Request:'
             reset_link = request.build_absolute_uri('/') + f'reset_password/{uid}/{token}/'
-            #message = render_to_string('reset_password.html', {'reset_link': reset_link})
-            #message = 'just to try some sample message'
             message = f'Click on the link to reset your password: {reset_link}'
             email_from = settings.EMAIL_HOST_USER
             send_mail(subject, message, email_from, [email], fail_silently=False)

@@ -6,6 +6,7 @@
 		<title>Macsauce Expose</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
 	</head>
@@ -80,10 +81,10 @@
 									{% endif %}
 									<style>
 									img	{
-										min-height: 300px;
-										min-width: 400px;
+										min-height: 400px;
+										min-width: 350px;
 										max-width: 500px;
-										max-height: 300px;
+										max-height: 500px;
 										width: auto;
 										height: auto;
 									  }
@@ -124,10 +125,10 @@
 
 				<!-- Footer -->
 					<footer id="footer">
-						<section>
+						<!-- <section>
 
 							<p> List for most popular posts or something else sha, should probably remove this section. </p> 
-						</section>
+						</section> -->
 							<section>
 								<form class="search" action="{% url 'index' %}">
 									<input type="text" name="q"  placeholder="Search for posts" id="s" />
